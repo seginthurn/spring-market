@@ -1,6 +1,7 @@
 package br.com.inthurn.springmarket.model.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,11 +15,11 @@ public class ProductEntity {
     private String description;
     private Double price;
 
-    @ManyToOne
-    private CategoryEntity categoryEntity;
+    @OneToMany
+    private List<CategoryEntity> categoryEntity;
 
 
-    public ProductEntity(Integer id, String name, String description, Double price, CategoryEntity categoryEntity) {
+    public ProductEntity(Integer id, String name, String description, Double price, List<CategoryEntity> categoryEntity) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -27,6 +28,13 @@ public class ProductEntity {
     }
 
     public ProductEntity() {
+    }
+
+    public ProductEntity(String name, String description, Double price, List<CategoryEntity> categoryEntity) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.categoryEntity = categoryEntity;
     }
 
     public Integer getId() {
@@ -61,11 +69,11 @@ public class ProductEntity {
         this.price = price;
     }
 
-    public CategoryEntity getCategoryEntity() {
+    public List<CategoryEntity> getCategoryEntity() {
         return categoryEntity;
     }
 
-    public void setCategoryEntity(CategoryEntity categoryEntity) {
+    public void setCategoryEntity(List<CategoryEntity> categoryEntity) {
         this.categoryEntity = categoryEntity;
     }
 
